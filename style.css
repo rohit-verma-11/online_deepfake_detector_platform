@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;800&display=swap');
+
+:root {
+    --neon-blue: #00f3ff;
+    --neon-red: #ff003c;
+}
+
+body { font-family: 'JetBrains Mono', monospace; }
+
+/* CRT Scanline Overlay */
+.crt-overlay::after {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+    z-index: 100;
+    background-size: 100% 3px, 3px 100%;
+    pointer-events: none;
+}
+
+/* Military HUD Geometry */
+.hud-box {
+    clip-path: polygon(
+        0 15px, 15px 0, 
+        calc(100% - 15px) 0, 100% 15px, 
+        100% calc(100% - 15px), calc(100% - 15px) 100%, 
+        15px 100%, 0 calc(100% - 15px)
+    );
+}
+
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+
+@keyframes scan-line {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(1000%); }
+}
+
+#scan-bar {
+    background: linear-gradient(to bottom, transparent, rgba(0, 243, 255, 0.2), transparent);
+    animation: scan-line 3s linear infinite;
+}
